@@ -13,5 +13,9 @@ module.exports = (phase, { defaultConfig }) => {
 
   return {
     /* config options for all phases except development here */
+    env: {
+      GREETING: process.env.GREETING,
+      API_HOST: process.env.API_HOST,
+    },
   }
 }
