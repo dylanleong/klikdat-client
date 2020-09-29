@@ -23,7 +23,7 @@ export default class Read extends Component {
   }
 
   fetchPlaces() {
-    fetch("http://localhost:9000/places/all")
+    fetch(process.env.API_HOST + "places/all")
       .then(response => response.json())
       .then(places => this.setState({ data: places, checkedBoxes: [] }, () => console.log("initial state")))
   }
@@ -45,7 +45,7 @@ export default class Read extends Component {
       headers: { 'Content-Type': 'application/json; charset=UTF-8' },
       body: JSON.stringify({ 'ids': this.state.checkedBoxes })
     }
-    fetch('http://localhost:9000/places/delete', requestOptions)
+    fetch(process.env.API_HOST + 'places/delete', requestOptions)
       .then(response => {
         if (response.status === 200) {
           document.getElementById('msg').innerHTML = '<span style="color:green;">Places deleted successfully</span>'

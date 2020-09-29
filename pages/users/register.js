@@ -28,7 +28,7 @@ export default class Register extends React.Component {
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(this.state)
         }
-        fetch('http://localhost:9000/users/signup', requestOptions)
+        fetch(process.env.API_HOST + 'users/signup', requestOptions)
             .then((response) => response.json())
             .then(data => {
                 alert(data.token)

@@ -6,6 +6,11 @@ export default function Profile() {
     <div>
       <p>This is the Profile page.</p>
       <p>
+      {'HOST - ' + process.env.API_HOST}
+      {console.log(process.env.API_HOST)}
+      {console.log(process.env.GREETING)}
+      </p>
+      <p>
         <Link href="/account">
           <a>Go: Account</a>
         </Link>

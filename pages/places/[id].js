@@ -7,7 +7,7 @@ import Router from 'next/router'
 
 export default class ReadOne extends Component {
     static async getInitialProps({ query: { id } }) {
-        const res = await fetch("http://localhost:9000/places/" + id)
+        const res = await fetch(process.env.API_HOST + "places/" + id)
         const data = await res.json()        
         return {
             data: data
@@ -36,7 +36,7 @@ export default class ReadOne extends Component {
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(this.state)
         }
-        fetch('http://localhost:9000/places/' + this.props.data.id, requestOptions)
+        fetch(process.env.API_HOST + 'places/' + this.props.data.id, requestOptions)
             .then((response) => response.json())
             .then(data => {                
                 Router.push('/places/read')

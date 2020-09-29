@@ -33,7 +33,7 @@ class Login extends React.Component {
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(this.state)
         }
-        fetch('http://localhost:9000/users/signin', requestOptions)
+        fetch(process.env.API_HOST + 'users/signin', requestOptions)
             .then((response) => response.json())
             .then(data => {                
                 Router.push('/tic')

@@ -12,8 +12,7 @@ class Test extends Component {
 
   async componentDidMount() {    
     try {
-      const response = await fetch("http://localhost:9000/api/product", {
-        // const response = await fetch("http://localhost:9000/users/all", {        
+      const response = await fetch(process.env.API_HOST + "api/product", {        
         headers: {
           Accept: "application/json",
           // Authorization: `${localStorage.getItem('token')}`

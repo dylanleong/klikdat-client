@@ -27,7 +27,7 @@ export default class Create extends React.Component {
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(this.state)
         }
-        fetch('http://localhost:9000/places/', requestOptions)
+        fetch(process.env.API_HOST + 'places/', requestOptions)
             .then((response) => response.json())
             .then(data => {                
                 Router.push('/places/read')

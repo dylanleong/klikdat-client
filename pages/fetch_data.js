@@ -5,7 +5,7 @@ import fetch from 'isomorphic-unfetch'
 
 export default class extends Component {
   static async getInitialProps() {
-    const res = await fetch("http://localhost:9000/users/all")
+    const res = await fetch(process.env.API_HOST + "users/all")
     const data = await res.json()
     console.log(data)
     return {
