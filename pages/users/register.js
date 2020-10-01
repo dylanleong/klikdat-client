@@ -28,12 +28,10 @@ export default class Register extends React.Component {
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(this.state)
         }
-        fetch(process.env.API_HOST + 'users/signup', requestOptions)
+        fetch(process.env.API_HOST + 'users/signup', requestOptions)        
             .then((response) => response.json())
-            .then(data => {
-                alert(data.token)
-                localStorage.setItem("token", data.token)
-                Router.push('/tic')
+            .then(data => {                
+                Router.push('/users/login')
 
             })
 
