@@ -58,7 +58,8 @@ export default class Mapping extends Component {
   getLocation() {
     console.log(this)
     let self = this
-    if ("geolocation" in navigator) {
+    // if ("geolocation" in navigator) {
+      if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(function (position) {
         self.setState({
           mylat: position.coords.latitude,
