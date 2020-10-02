@@ -42,14 +42,22 @@ export default class Mapping extends Component {
     super(props);
     // this.mapRef = React.createRef();
     this.state = {
-      mylat: null,
-      mylng: null
+      mylat: 51.5074,
+      mylng: 0.1278
     }
+    this.getLocation = this.getLocation.bind(this)
   }
 
   componentDidMount() {
     let self = this
-    // const map = this.mapRef.leafletElement;    
+    // const map = this.mapRef.leafletElement;        
+    const L = require('leaflet')    
+    L.Icon.Default.imagePath='/images/leaflet/' 
+  }
+
+  getLocation() {
+    console.log(this)
+    let self = this
     if ("geolocation" in navigator) {
       navigator.geolocation.getCurrentPosition(function (position) {
         self.setState({
@@ -58,8 +66,6 @@ export default class Mapping extends Component {
         })
       })
     }
-    const L = require('leaflet')    
-    L.Icon.Default.imagePath='/images/leaflet/' 
   }
 
   render() {
@@ -67,6 +73,8 @@ export default class Mapping extends Component {
       <ClientOnly>
         <div id="map-container">
           <div id="mapid">
+            <button onClick={this.getLocation}>Get Current Location</button>
+            <br/>
             <Map center={[this.state.mylat, this.state.mylng]} zoom={12} style={{ height: "700px", width: "100%" }} >
               <TileLayer
                 url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
