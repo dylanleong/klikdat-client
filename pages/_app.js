@@ -5,6 +5,12 @@ import App from 'next/app';
 import cookie from 'cookie';
 import { AuthProvider } from '../providers/Auth';
 
+// fix Fontawesome bug in NextJS production build. FAS works correctly in dev without these lines
+import { config } from '@fortawesome/fontawesome-svg-core' 
+import '@fortawesome/fontawesome-svg-core/styles.css'
+config.autoAddCss = false
+
+
 class MyApp extends App {
     render() {
         const { Component, pageProps, authenticated } = this.props;
