@@ -44,7 +44,7 @@ export default class Layout extends React.Component {
                 </Head>
                 <div className={`sb-nav-fixed ${sideVis}`}>
                     <nav className="sb-topnav navbar navbar-expand navbar-dark bg-dark">
-                        <Link href="/"><a className="navbar-brand"><img src="/images/klikdat_logo_empty.png" width="200" height="40"/></a></Link>
+                        <Link href="/"><a className="navbar-brand"><img src="/images/klikdat_logo_empty.png" width="100%" height="100%"/></a></Link>
                         <button className="btn btn-link btn-sm order-1 order-lg-0" id="sidebarToggle" onClick={this.toggleMenu}><i className="fas fa-bars"></i></button>
                         <form className="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0">
                             <div className="input-group">
