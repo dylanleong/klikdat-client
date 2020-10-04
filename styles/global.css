@@ -14,7 +14,7 @@
  /* start user defined */
  #map-container {
     position: relative;
-    height: 180px;
+    height: 100%;
     width: 100%;
 }
 
