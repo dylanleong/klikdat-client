@@ -20,7 +20,7 @@ class Test extends Component {
         }
       });
       if (!response.ok) {
-        console.log(response.status)
+        console.log(response.status)        
         if (response.status === 429) {
           // displaying "wow, slow down mate"
         } else if (response.status === 401) {
@@ -43,6 +43,7 @@ class Test extends Component {
 
       }
       console.log(response.status)
+      console.log(cookie.get('user'))
       const data = await response.json();
       this.setState({ data: data });
       
