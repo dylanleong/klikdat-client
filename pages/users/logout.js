@@ -8,7 +8,7 @@ export default withAuth(function Logout() {
   const { setAuthenticated } = useAuth();
   useEffect(() => {
     async function doLogout() {
-      setAuthenticated(false)
+      setAuthenticated(false)      
       cookie.remove('user')
     }
     doLogout();

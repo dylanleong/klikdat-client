@@ -1,4 +1,4 @@
-import { useIsAuthenticated } from '../providers/Auth';
+import { userIsAuthenticated } from '../providers/Auth';
 import withConditionalRedirect from './withConditionalRedirect';
 
 /**
@@ -10,7 +10,7 @@ export default function withAuth(WrappedComponent, location = '/users/login') {
     WrappedComponent,
     location,
     clientCondition: function withAuthClientCondition() {
-      return !useIsAuthenticated();
+      return !userIsAuthenticated();
     },
     serverCondition: function withAuthServerCondition(ctx) {
       return !ctx.req?.cookies.session;

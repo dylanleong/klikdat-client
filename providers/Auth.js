@@ -28,7 +28,7 @@ export function useAuth() {
   return context;
 }
 
-export function useIsAuthenticated() {
+export function userIsAuthenticated() {
   const context = useAuth();
   return context.isAuthenticated;
 }

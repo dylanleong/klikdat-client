@@ -1,5 +1,4 @@
 import Head from 'next/head'
-import Link from "next/link";
 import MyLayout from "../../components/layout";
 import React, { Component } from 'react'
 import fetch from 'isomorphic-unfetch'
@@ -38,6 +37,7 @@ class Login extends React.Component {
             .then(data => {                                
                 this.context.setAuthenticated(true)
                 cookie.set('user',data.token)
+                // localStorage.setItem('token', data.token)
                 Router.push('/test')
             })                        
       }

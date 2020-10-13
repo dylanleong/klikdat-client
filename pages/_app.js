@@ -29,9 +29,10 @@ class MyApp extends App {
 MyApp.getInitialProps = async appContext => {
     let authenticated = false;
     const request = appContext.ctx.req;
+    
     if (request) {
-        request.cookies = cookie.parse(request.headers.cookie || '');
-        authenticated = !!request.cookies.session;
+        request.cookies = cookie.parse(request.headers.cookie || '');        
+        authenticated = !!request.cookies.user;
     }
 
     // Call the page's `getInitialProps` and fill `appProps.pageProps`

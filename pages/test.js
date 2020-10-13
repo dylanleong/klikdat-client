@@ -41,9 +41,9 @@ class Test extends Component {
         }
         throw new Error(response);
 
-      }
+      }      
       console.log(response.status)
-      console.log(cookie.get('user'))
+      // console.log(cookie.get('user'))
       const data = await response.json();
       this.setState({ data: data });
       
