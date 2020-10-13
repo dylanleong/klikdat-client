@@ -31,8 +31,14 @@ MyApp.getInitialProps = async appContext => {
     const request = appContext.ctx.req;
     
     if (request) {
-        request.cookies = cookie.parse(request.headers.cookie || '');        
-        authenticated = !!request.cookies.user;
+        request.cookies = cookie.parse(request.headers.cookie || '');
+        console.log(request.cookies.user)
+        if (request.cookies.user != undefined) {
+            authenticated = !!request.cookies.user;    
+        } else {
+            authenticated = false
+        }
+        
     }
 
     // Call the page's `getInitialProps` and fill `appProps.pageProps`

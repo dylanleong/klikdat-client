@@ -34,11 +34,15 @@ class Login extends React.Component {
         }
         fetch(process.env.API_HOST + 'users/signin', requestOptions)
             .then((response) => response.json())
-            .then(data => {                                
-                this.context.setAuthenticated(true)
-                cookie.set('user',data.token)
-                // localStorage.setItem('token', data.token)
-                Router.push('/test')
+            .then(data => {
+                if (data.success === true) {
+                    console.log(data)
+                    this.context.setAuthenticated(true)
+                    cookie.set('user',data.token)
+                    // localStorage.setItem('token', data.token)
+                    Router.push('/test')
+                }
+                
             })                        
       }
 
