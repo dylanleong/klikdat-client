@@ -2,9 +2,9 @@ import Head from 'next/head'
 import Link from 'next/link'
 import React, { useState } from "react";
 import { userIsAuthenticated } from '../providers/Auth';
+import cookie from 'js-cookie'
 
-const name = 'Your Name'
-export const siteTitle = 'Next.js Sample Website'
+export const siteTitle = 'klikdat'
 
 export default function Layout(props) {
     const [showSideNav, setSideNav] = useState(true);
@@ -12,14 +12,15 @@ export default function Layout(props) {
 
     const toggleMenu = () => {
         setSideNav(!showSideNav)
-        setSideVis(showSideNav? 'sb-sidenav-toggled' : '')
+        setSideVis(showSideNav ? 'sb-sidenav-toggled' : '')
         console.log(showSideNav)
         console.log(sideVis)
     }
-        
 
-        
-    const auth = userIsAuthenticated()    
+    const d = new Date()
+    const cYear = d.getFullYear()
+
+    const auth = userIsAuthenticated()
 
     return (
         <div>
@@ -55,27 +56,32 @@ export default function Layout(props) {
                                 <button className="btn btn-primary" type="button"><i className="fas fa-search"></i></button>
                             </div>
                         </div>
-                    </form>
+                    </form>                    
 
-                    
                     <ul className="navbar-nav ml-auto ml-md-0">
-                    
-                        {auth === false && 
-                            <React.Fragment>
-                            <li className="nav-item"><Link href="/users/login"><a className="nav-link">log in</a></Link></li>
-                        <li className="nav-item"><Link href="/users/register"><a className="nav-link">register</a></Link></li>
-                        </React.Fragment>
-                        }
-                                                    
+
                         <li className="nav-item"><Link href="/test"><a className="nav-link">test</a></Link></li>
-                        <li className="nav-item dropdown">
-                            <a className="nav-link dropdown-toggle" id="userDropdown" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i className="fas fa-user fa-fw"></i></a>
-                            <div className="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
-                                <a className="dropdown-item" href="#">Settings</a><a className="dropdown-item" href="#">Activity Log</a>
-                                <div className="dropdown-divider"></div>
-                                <Link href="/users/logout"><a href="/users/logout" className="dropdown-item">Logout</a></Link>
-                            </div>
-                        </li>
+                        {auth === false &&
+                            <React.Fragment>
+                                <li className="nav-item"><Link href="/users/login"><a className="nav-link">log in</a></Link></li>
+                                <li className="nav-item"><Link href="/users/register"><a className="nav-link">register</a></Link></li>
+                            </React.Fragment>
+                        }
+                        {auth === true &&
+                            <React.Fragment>
+                                <li className="nav-item"><a className="nav-link">{cookie.get('first_name')}</a></li>
+                                <li className="nav-item dropdown">
+                                    <a className="nav-link dropdown-toggle" id="userDropdown" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i className="fas fa-user fa-fw"></i></a>
+                                    <div className="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
+                                        <Link href="/users/profile"><a className="dropdown-item" href="#">profile</a></Link>
+                                        <a className="dropdown-item" href="#">settings</a>
+                                        <div className="dropdown-divider"></div>
+                                        <Link href="/users/logout"><a className="dropdown-item">logout</a></Link>
+                                    </div>
+                                </li>
+                            </React.Fragment>
+                        }
+
                     </ul>
                 </nav>
                 <div id="layoutSidenav">
@@ -122,8 +128,13 @@ export default function Layout(props) {
                                 </div>
                             </div>
                             <div className="sb-sidenav-footer">
-                                <div className="small">Logged in as:</div>Start Bootstrap
-                        </div>
+                                <div className="small">Logged in as:</div>
+                                {auth === true &&
+                                    <React.Fragment>
+                                        <p>{cookie.get('first_name')}</p>
+                                    </React.Fragment>
+                                }
+                            </div>
                         </nav>
                     </div>
                     <div id="layoutSidenav_content">
@@ -139,7 +150,7 @@ export default function Layout(props) {
                         <footer className="py-4 bg-light mt-auto">
                             <div className="container-fluid">
                                 <div className="d-flex align-items-center justify-content-between small">
-                                    <div className="text-muted">Copyright &copy; Your Website 2019</div>
+                                    <div className="text-muted">Copyright &copy; klikdat {cYear}</div>
                                     <div>
                                         <a href="#">Privacy Policy</a>
                             &middot;
@@ -154,5 +165,5 @@ export default function Layout(props) {
             </div>
         </div>
     )
-    
+
 }

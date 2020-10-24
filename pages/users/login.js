@@ -1,90 +1,90 @@
-import Head from 'next/head'
+import React, { useState } from 'react'
 import MyLayout from "../../components/layout";
-import React, { Component } from 'react'
-import fetch from 'isomorphic-unfetch'
-import Router from 'next/router'
+import { useAuth } from '../../providers/Auth';
 import withoutAuth from '../../hocs/withoutAuth';
-import {AuthContext} from '../../providers/Auth'
+import axios from 'axios'
+import Head from 'next/head'
+import Router from 'next/router'
 import cookie from 'js-cookie'
 
-class Login extends React.Component {
-    static contextType = AuthContext
+function Login() {    
+    const { setAuthenticated } = useAuth();
 
-    constructor(props) {
-        super(props)
-        this.state = {
-            username: '',
-            password: ''
-        }
-        this.handleChange = this.handleChange.bind(this)
-        this.handleSubmit = this.handleSubmit.bind(this)
+    const [form, setState] = useState({
+        username: '',
+        password: '',        
+    })
+    
 
-    }
-
-    handleChange(e) {
-        this.setState({ [e.target.name]: e.target.value })
-    }
-
-    handleSubmit(e) {                
+    const updateField = e => {
+        setState({
+            ...form,
+            [e.target.name]: e.target.value
+        });        
+    };
+    
+    const handleSubmit = async (e) => {
         e.preventDefault()
-        const requestOptions = {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(this.state)
+        const options = {
+            url: process.env.API_HOST + 'users/signin',
+            method: 'post',
+            headers: {              
+              'Content-Type': 'application/json',
+            },
+            data: form
+          }
+        const response = await axios(options)
+        
+        if (response.status === 200) {            
+            setAuthenticated(true)
+            cookie.set('token',response.data.token)
+            cookie.set('id',response.data.id)
+            cookie.set('username',response.data.username)
+            cookie.set('first_name',response.data.first_name)
+            Router.push('/test')
+        } else {
+    
         }
-        fetch(process.env.API_HOST + 'users/signin', requestOptions)
-            .then((response) => response.json())
-            .then(data => {
-                if (data.success === true) {
-                    console.log(data)
-                    this.context.setAuthenticated(true)
-                    cookie.set('user',data.token)
-                    // localStorage.setItem('token', data.token)
-                    Router.push('/test')
-                }
-                
-            })                        
-      }
+    }
+    
+    const title = 'Login'
 
-    render() {
-        const title = 'Login'
-        return (
-            <>
-                <Head>
-                    <title>{title}</title>
-                </Head>
-                <MyLayout>
-                <div className="container">
-                    <div className="row justify-content-center">
-                        <div className="col-lg-5">
-                            <div className="card shadow-lg border-0 rounded-lg mt-5">
-                                <div className="card-header"><h3 className="text-center font-weight-light my-4">Login</h3></div>
-                                <div className="card-body">
-                                    <form onSubmit={this.handleSubmit}>
-                                        <div className="form-group"><label className="small mb-1" htmlFor="inputEmailAddress">Email</label>
-                                            <input name="username" className="form-control py-4" id="inputEmailAddress" type="email" placeholder="Enter email address" onChange={this.handleChange} /></div>
-                                        <div className="form-group"><label className="small mb-1" htmlFor="inputPassword">Password</label>
-                                            <input name="password" className="form-control py-4" id="inputPassword" type="password" placeholder="Enter password" onChange={this.handleChange}/></div>
-                                        <div className="form-group">
-                                            <div className="custom-control custom-checkbox"><input className="custom-control-input" id="rememberPasswordCheck" type="checkbox" /><label className="custom-control-label" for="rememberPasswordCheck">Remember password</label></div>
-                                        </div>
-                                        <div className="form-group d-flex align-items-center justify-content-between mt-4 mb-0">
-                                            <a className="small" href="password.html">Forgot Password?</a>
-                                            <input className="btn btn-primary" type="submit" value="Login" />
-                                        </div>
-                                    </form>
-                                </div>
-                                <div className="card-footer text-center">
-                                    <div className="small"><a href="register.html">Need an account? Sign up!</a></div>
-                                </div>
+    return (
+        <>
+            <Head>
+                <title>{title}</title>
+            </Head>
+            <MyLayout>
+            <div className="container">
+                <div className="row justify-content-center">
+                    <div className="col-lg-5">
+                        <div className="card shadow-lg border-0 rounded-lg mt-5">
+                            <div className="card-header"><h3 className="text-center font-weight-light my-4">Login</h3></div>
+                            <div className="card-body">
+                                <form onSubmit={handleSubmit}>
+                                    <div className="form-group"><label className="small mb-1" htmlFor="inputEmailAddress">Email</label>
+                                        <input name="username" className="form-control py-4" id="inputEmailAddress" type="email" placeholder="Enter email address" autoComplete="on" onChange={updateField} /></div>
+                                    <div className="form-group"><label className="small mb-1" htmlFor="inputPassword">Password</label>
+                                        <input name="password" className="form-control py-4" id="inputPassword" type="password" placeholder="Enter password" autoComplete="on" onChange={updateField}/></div>
+                                    <div className="form-group">
+                                        <div className="custom-control custom-checkbox"><input className="custom-control-input" id="rememberPasswordCheck" type="checkbox" /><label className="custom-control-label" htmlFor="rememberPasswordCheck">Remember password</label></div>
+                                    </div>
+                                    <div className="form-group d-flex align-items-center justify-content-between mt-4 mb-0">
+                                        <a className="small" href="password.html">Forgot Password?</a>
+                                        <input className="btn btn-primary" type="submit" value="Login" />
+                                    </div>
+                                </form>
+                            </div>
+                            <div className="card-footer text-center">
+                                <div className="small"><a href="register.html">Need an account? Sign up!</a></div>
                             </div>
                         </div>
                     </div>
                 </div>
-                </MyLayout>
-            </>
-        )
-    }
+            </div>
+            </MyLayout>
+        </>
+    )
 }
 
 export default withoutAuth(Login)
