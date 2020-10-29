@@ -4,6 +4,7 @@ import 'leaflet/dist/leaflet.css'
 import App from 'next/app';
 import cookie from 'cookie';
 import { AuthProvider } from '../providers/Auth';
+import { ToastProvider } from '../providers/Toast';
 import jwt_decode from 'jwt-decode'
 import axios from 'axios'
 
@@ -12,42 +13,41 @@ import { config } from '@fortawesome/fontawesome-svg-core'
 import '@fortawesome/fontawesome-svg-core/styles.css'
 config.autoAddCss = false
 
+function MyApp({ Component, pageProps, authenticated }) {
+    const Layout = Component.Layout ? Component.Layout : React.Fragment    
 
-class MyApp extends App {
-    render() {
-        const { Component, pageProps, authenticated } = this.props;
-        const Layout = Component.Layout ? Component.Layout : React.Fragment
-        return (
-
-            <AuthProvider authenticated={authenticated}>
-                <Layout>
-                    <Component {...pageProps} />
-                </Layout>
-            </AuthProvider>
-        );
-    }
-}
+    return (          
+                <AuthProvider authenticated={authenticated}>
+                    <Layout>                        
+                    <ToastProvider>
+                        <Component {...pageProps} />
+                    </ToastProvider>
+                    </Layout>
+                </AuthProvider>            
+        )
+  }
 
 MyApp.getInitialProps = async appContext => {
-    let authenticated = false;
+    var authenticated = false;
+    var jwtExpired = true            
+    var jwtVerified = false
     const request = appContext.ctx.req;
 
     if (request) {
         request.cookies = cookie.parse(request.headers.cookie || '');
         const token = request.cookies.token
         if (token) {
-            // verify jwt token
-            let jwtExpired = true
-            let jwtVerified = false
-
             var rawToken = token.split(" ")[1]
+
+            // check jwt expiry            
             var decodedToken = jwt_decode(rawToken);
             var dateNow = new Date();
             if (decodedToken.exp < dateNow.getTime()) {
                 jwtExpired = false
             }
-            console.log(jwtExpired)
+            
 
+            // check jwt valid            
             const options = {
                 url: process.env.API_HOST + 'users/verify',
                 method: 'post',
@@ -61,13 +61,15 @@ MyApp.getInitialProps = async appContext => {
             const response = await axios(options)
 
             if (response.status === 200) {
-                console.log("the JWT is valid")
-            } else {
-                console.log("the JWT is NOT valid")
+                if (response.data.valid === true) {
+                    jwtVerified = true
+                } else {
+                    jwtVerified = false
+                }
             }
         }
 
-        if (request.cookies.token != undefined) {
+        if (request.cookies.token != undefined && jwtVerified === true && jwtExpired === false) {
             authenticated = !!request.cookies.token;
         } else {
             authenticated = false

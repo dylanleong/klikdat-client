@@ -5,16 +5,27 @@ import axios from 'axios'
 import Head from 'next/head'
 import Router from 'next/router'
 import cookie from 'js-cookie'
+import { useToasts } from '../../providers/Toast';
 
 function Profile() {
-    const [form, setState] = useState({
-        username: '',
-        password: '',
-        first_name: '',
-        last_name: ''
+    const [formState, setFormState] = useState({
+        formValues: {
+            username: '',
+            password: '',
+            first_name: '',
+            last_name: ''
+        }
+        
     })
+    
+    const updateField = ({ target }) => {
+        const { formValues } = formState;
+        formValues[target.name] = target.value;
+        setFormState({ formValues });
+        console.log(formState.formValues)
+      };
 
-    const getUser = async () => {
+    async function getUser() {
         const options = {
             url: process.env.API_HOST + 'users/' + cookie.get('id'),
             method: 'get',
@@ -24,51 +35,51 @@ function Profile() {
             }
         }
         const response = await axios(options)        
-        setState(response.data)
-        console.log(form)
-    }
+        
+        setFormState({formValues: {...formState.formValues,            
+            username: response.data.username,
+            first_name: response.data.first_name,
+            last_name: response.data.last_name
+            }            
+        })        
+    }                        
 
-    const updateField = e => {
-        setState({
-            ...form,
-            [e.target.name]: e.target.value
-        });
-    };
+    useEffect(() => {
+        getUser()
+        console.log(formState)
+      }, [])    
 
     const handleSubmit = async (e) => {
         e.preventDefault()
         const options = {
-            url: process.env.API_HOST + 'users/signin',
-            method: 'post',
+            url: process.env.API_HOST + `users/${cookie.get('id')}`,
+            method: 'patch',
             headers: {
                 'Content-Type': 'application/json',
             },
-            data: form
+            data: formState.formValues
         }
         const response = await axios(options)
 
-        if (response.status === 200) {
-
-            cookie.set('token', response.data.token)
-            cookie.set('first_name', response.data.first_name)
-            Router.push('/test')
+        if (response.status === 200) {            
+            Router.push('/profile')
         } else {
 
         }
     }
 
-    useEffect(() => {
-        getUser()      
-      }, [])
-
     const title = 'User Profile'
+    function Demo() {
+        const { add } = useToasts();
+        return <button onClick={() => add("Click to dismiss!")}>Add toast</button>;
+      }
 
     return (
         <>
             <Head>
                 <title>{title}</title>
-            </Head>
-            <MyLayout>
+            </Head>            
+            <MyLayout>                
                 <div className="container">
                     <div className="row justify-content-center">
                         <div className="col-lg-7">
@@ -80,27 +91,27 @@ function Profile() {
                                             <div className="col-md-6">
                                                 <div className="form-group">
                                                     <label className="small mb-1" htmlFor="inputFirstName">First Name</label>
-                                                    <input name="first_name" className="form-control py-4" id="inputFirstName" type="text" placeholder="Enter first name" onChange={updateField} />
+                                                    <input name="first_name" className="form-control py-4" id="inputFirstName" type="text" placeholder="Enter first name" value={formState.formValues.first_name} onChange={updateField} />
                                                 </div>
                                             </div>
                                             <div className="col-md-6">
                                                 <div className="form-group">
                                                     <label className="small mb-1" htmlFor="inputLastName">Last Name</label>
-                                                    <input name="last_name" className="form-control py-4" id="inputLastName" type="text" placeholder="Enter last name" onChange={updateField} />
+                                                    <input name="last_name" className="form-control py-4" id="inputLastName" type="text" placeholder="Enter last name" value={formState.formValues.last_name} onChange={updateField} />
                                                 </div>
                                             </div>
                                         </div>
                                         <div className="form-group">
                                             <label className="small mb-1" htmlFor="inputEmailAddress">Email</label>
-                                            <input name="username" className="form-control py-4" id="inputEmailAddress" type="email" aria-describedby="emailHelp" placeholder="Enter email address" onChange={updateField} />
+                                            <input name="username" className="form-control py-4" id="inputEmailAddress" type="email" aria-describedby="emailHelp" placeholder="Enter email address" value={formState.formValues.username} onChange={updateField} />
                                         </div>
                                         <div className="form-group mt-4 mb-0">
                                             <input className="btn btn-primary btn-block" type="submit" value="Update" />
                                         </div>
                                     </form>
+                                    <Demo />
                                 </div>
-                                <div className="card-footer text-center">
-                                    <div className="small"><a href="register.html">Have an account? Go to login</a></div>
+                                <div className="card-footer text-center">                                    
                                 </div>
                             </div>
                         </div>

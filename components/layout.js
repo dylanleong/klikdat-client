@@ -20,8 +20,7 @@ export default function Layout(props) {
     const d = new Date()
     const cYear = d.getFullYear()
 
-    const auth = userIsAuthenticated()
-
+    const auth = userIsAuthenticated()    
     return (
         <div>
             <Head>
@@ -46,10 +45,21 @@ export default function Layout(props) {
 
             </Head>
             <div className={`sb-nav-fixed ${sideVis}`}>
-                <nav className="sb-topnav navbar navbar-expand navbar-dark bg-dark">
-                    <Link href="/"><a className="navbar-brand"><img src="/images/klikdat_logo_empty.png" width="100%" height="100%" /></a></Link>
-                    <button className="btn btn-link btn-sm order-1 order-lg-0" id="sidebarToggle" onClick={toggleMenu}><i className="fas fa-bars"></i></button>
-                    <form className="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0">
+                <nav className="sb-topnav navbar navbar-expand navbar-dark bg-dark">                    
+                    <Link href="/"><a className="navbar-brand">
+                    <picture className="order-0 order-lg-0">
+                        <source srcset="/images/klikdat_logo_empty.png" type="image/jpeg" media="(min-width: 40em)" width="100%" height="100%"/>
+                        <source srcset="/images/k_cropped.png" type="image/jpeg" width="100%" height="100%"/>                        
+                        <img src="/images/klikdat_logo_empty.png" width="100%" height="100%" />
+                    </picture>
+                    {/* <img src="/images/klikdat_logo_empty.png" width="100%" height="100%" /> */}
+                    </a></Link>
+                    <button className="btn btn-link btn-sm order-1 order-lg-1" id="sidebarToggle" onClick={toggleMenu}><i className="fas fa-2x fa-bars"></i></button>
+                    <button className="btn btn-link btn-sm order-2 order-lg-2" id="jobs"><i className="fas fa-2x fa-briefcase"></i></button>
+                    <button className="btn btn-link btn-sm order-3 order-lg-3" id="properties"><i className="fas fa-2x fa-home"></i></button>
+                    <button className="btn btn-link btn-sm order-4 order-lg-4" id="properties"><i className="fas fa-2x fa-car"></i></button>
+                                        
+                    <form className="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0 order-5 order-lg-5">
                         <div className="input-group">
                             <input className="form-control" type="text" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2" />
                             <div className="input-group-append">
@@ -58,11 +68,11 @@ export default function Layout(props) {
                         </div>
                     </form>                    
 
-                    <ul className="navbar-nav ml-auto ml-md-0">
+                    <ul className="navbar-nav ml-auto ml-md-0 order-6 order-lg-6">
 
-                        <li className="nav-item"><Link href="/test"><a className="nav-link">test</a></Link></li>
+                        <li className="nav-item"><Link href="/test"><a className="nav-link">test</a></Link></li>                        
                         {auth === false &&
-                            <React.Fragment>
+                            <React.Fragment>                            
                                 <li className="nav-item"><Link href="/users/login"><a className="nav-link">log in</a></Link></li>
                                 <li className="nav-item"><Link href="/users/register"><a className="nav-link">register</a></Link></li>
                             </React.Fragment>

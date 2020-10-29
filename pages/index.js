@@ -6,7 +6,6 @@ import jwt_decode from 'jwt-decode'
 export default function Profile() {
   var isExpired = false
   const token = cookie.get('token')
-
   if (token) { 
   var decodedToken = jwt_decode(token.split(" ")[1]);
   var dateNow = new Date();
@@ -24,7 +23,7 @@ return (
       {console.log(process.env.API_HOST)}
       {console.log(process.env.GREETING)}
       <br />
-      {'JWT - ' + cookie.get('token')}
+      {/* {'JWT - ' + cookie.get('token')} */}
     </p>
     <p>
       <Link href="/account">

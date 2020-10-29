@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import MyLayout from "../../components/layout";
 import { useAuth } from '../../providers/Auth';
 import withoutAuth from '../../hocs/withoutAuth';
+import { useToasts } from '../../providers/Toast';
 import axios from 'axios'
 import Head from 'next/head'
 import Router from 'next/router'
@@ -15,6 +16,7 @@ function Login() {
         password: '',        
     })
     
+    const { add } = useToasts();
 
     const updateField = e => {
         setState({
@@ -40,8 +42,9 @@ function Login() {
             cookie.set('token',response.data.token)
             cookie.set('id',response.data.id)
             cookie.set('username',response.data.username)
-            cookie.set('first_name',response.data.first_name)
+            cookie.set('first_name',response.data.first_name)            
             Router.push('/test')
+            add("User Logged in Successfully!")
         } else {
     
         }

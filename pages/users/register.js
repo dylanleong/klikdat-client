@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import MyLayout from "../../components/layout";
 import withoutAuth from '../../hocs/withoutAuth';
+import { useToasts } from '../../providers/Toast';
 import axios from 'axios'
 import Head from 'next/head'
 import Router from 'next/router'
@@ -13,6 +14,8 @@ function Register() {
         last_name: ''
     });
 
+    const { add } = useToasts();
+    
     const updateField = e => {
         setState({
             ...form,
@@ -33,7 +36,9 @@ function Register() {
         const response = await axios(options)
         console.log(response)
         if (response.status === 201) {
-            Router.push('/users/login')
+            Router.push('/users/login')            
+            add("User Created Successfully!")
+            
         } else {
 
         }
