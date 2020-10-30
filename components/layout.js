@@ -44,13 +44,14 @@ export default function Layout(props) {
                 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js" crossOrigin="anonymous"></script>
 
             </Head>
+
             <div className={`sb-nav-fixed ${sideVis}`}>
                 <nav className="sb-topnav navbar navbar-expand navbar-dark bg-dark">                    
                     <Link href="/"><a className="navbar-brand">
                     <picture className="order-0 order-lg-0">
-                        <source srcset="/images/klikdat_logo_empty.png" type="image/jpeg" media="(min-width: 40em)" width="100%" height="100%"/>
-                        <source srcset="/images/k_cropped.png" type="image/jpeg" width="100%" height="100%"/>                        
-                        <img src="/images/klikdat_logo_empty.png" width="100%" height="100%" />
+                        <source srcSet="/images/klikdat_logo_empty.png" type="image/jpeg" media="(min-width: 650px)" width="100%" height="100%"/>
+                        <source srcSet="/images/k_cropped.png" type="image/jpeg" media="(min-width: 465px)" width="100%" height="100%"/>                        
+                        <img src="/images/k_cropped.png" width="100%" height="100%" />
                     </picture>
                     {/* <img src="/images/klikdat_logo_empty.png" width="100%" height="100%" /> */}
                     </a></Link>
