@@ -49,9 +49,9 @@ export default function Layout(props) {
                 <nav className="sb-topnav navbar navbar-expand navbar-dark bg-dark">                    
                     <Link href="/"><a className="navbar-brand">
                     <picture className="order-0 order-lg-0">
-                        <source srcSet="/images/klikdat_logo_empty.png" type="image/jpeg" media="(min-width: 650px)" width="100%" height="100%"/>
-                        <source srcSet="/images/k_cropped.png" type="image/jpeg" media="(min-width: 465px)" width="100%" height="100%"/>                        
-                        <img src="/images/k_cropped.png" width="100%" height="100%" />
+                        <source src="/images/klikdat_logo_empty.png" srcSet="/images/klikdat_logo_empty.png" type="image/jpeg" media="(min-width: 650px)" width="100%" height="100%" alt="big"/>
+                        <source src="/images/k_cropped.png" srcSet="/images/k_cropped.png" type="image/jpeg" media="(min-width: 465px)" width="100%" height="100%" alt="small"/>                        
+                        <img src="/images/k_cropped.png" width="100%" height="100%" alt="backup"/>
                     </picture>
                     {/* <img src="/images/klikdat_logo_empty.png" width="100%" height="100%" /> */}
                     </a></Link>
@@ -69,12 +69,10 @@ export default function Layout(props) {
                         </div>
                     </form>                    
 
-                    <ul className="navbar-nav ml-auto ml-md-0 order-6 order-lg-6">
-
-                        <li className="nav-item"><Link href="/test"><a className="nav-link">test</a></Link></li>                        
+                    <ul className="navbar-nav ml-auto ml-md-0 order-6 order-lg-6">                        
                         {auth === false &&
                             <React.Fragment>                            
-                                <li className="nav-item"><Link href="/users/login"><a className="nav-link">log in</a></Link></li>
+                                <li className="nav-item"><Link href="/users/login"><a className="nav-link">login</a></Link></li>
                                 <li className="nav-item"><Link href="/users/register"><a className="nav-link">register</a></Link></li>
                             </React.Fragment>
                         }
@@ -136,6 +134,7 @@ export default function Layout(props) {
                                     <Link href="/places/read"><a className="nav-link"><div className="sb-nav-link-icon"><i className="fas fa-table"></i></div>Places</a></Link>
                                     <Link href="/sandbox/mapping"><a className="nav-link"><div className="sb-nav-link-icon"><i className="fas fa-table"></i></div>Test - Map</a></Link>
                                     <Link href="/profile"><a className="nav-link"><div className="sb-nav-link-icon"><i className="fas fa-table"></i></div>Profile</a></Link>
+                                    <Link href="/test"><a className="nav-link"><div className="sb-nav-link-icon"><i className="fas fa-table"></i></div>Test</a></Link>                                    
                                 </div>
                             </div>
                             <div className="sb-sidenav-footer">
