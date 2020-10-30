@@ -49,9 +49,9 @@ export default function Layout(props) {
                 <nav className="sb-topnav navbar navbar-expand navbar-dark bg-dark">                    
                     <Link href="/"><a className="navbar-brand">
                     <picture className="order-0 order-lg-0">
-                        <source src="/images/klikdat_logo_empty.png" srcSet="/images/klikdat_logo_empty.png" type="image/jpeg" media="(min-width: 650px)" width="100%" height="100%" alt="big"/>
-                        <source src="/images/k_cropped.png" srcSet="/images/k_cropped.png" type="image/jpeg" media="(min-width: 465px)" width="100%" height="100%" alt="small"/>                        
-                        <img src="/images/k_cropped.png" width="100%" height="100%" alt="backup"/>
+                        <source srcSet="/images/klikdat_logo_empty.png" type="image/jpeg" media="(min-width: 400px)" width="100%" height="45px" alt="big"/>
+                        <source srcSet="/images/k_cropped.png" type="image/jpeg" media="(min-width: 265px)" width="100%" height="45px" alt="small"/>
+                        <img className="img-responsive" src="/images/k_cropped.png" width="100%" height="45px" alt="backup"/>
                     </picture>
                     {/* <img src="/images/klikdat_logo_empty.png" width="100%" height="100%" /> */}
                     </a></Link>
