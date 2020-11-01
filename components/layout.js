@@ -3,12 +3,14 @@ import Link from 'next/link'
 import React, { useState } from "react";
 import { userIsAuthenticated } from '../providers/Auth';
 import cookie from 'js-cookie'
+import Loader from 'react-loader-spinner'
 
 export const siteTitle = 'klikdat'
 
 export default function Layout(props) {
     const [showSideNav, setSideNav] = useState(true);
     const [sideVis, setSideVis] = useState('');
+    const [loading, setLoading] = useState(false)
 
     const toggleMenu = () => {
         setSideNav(!showSideNav)
@@ -17,10 +19,16 @@ export default function Layout(props) {
         console.log(sideVis)
     }
 
+    const handleSpinner = () => {
+        setLoading(!loading)
+        console.log('Spinner is toggled')
+        console.log(loading)
+    }
+
     const d = new Date()
     const cYear = d.getFullYear()
 
-    const auth = userIsAuthenticated()    
+    const auth = userIsAuthenticated()
     return (
         <div>
             <Head>
@@ -46,20 +54,21 @@ export default function Layout(props) {
             </Head>
 
             <div className={`sb-nav-fixed ${sideVis}`}>
-                <nav className="sb-topnav navbar navbar-expand navbar-dark bg-dark">                    
+                <nav className="sb-topnav navbar navbar-expand navbar-dark bg-dark">
                     <Link href="/"><a className="navbar-brand">
-                    <picture className="order-0 order-lg-0">
-                        <source srcSet="/images/klikdat_logo_empty.png" type="image/jpeg" media="(min-width: 400px)" width="100%" height="45px" alt="big"/>
-                        <source srcSet="/images/k_cropped.png" type="image/jpeg" media="(min-width: 265px)" width="100%" height="45px" alt="small"/>
-                        <img className="img-responsive" src="/images/k_cropped.png" width="100%" height="45px" alt="backup"/>
-                    </picture>
-                    {/* <img src="/images/klikdat_logo_empty.png" width="100%" height="100%" /> */}
+                        <picture className="order-0 order-lg-0">
+                            <source srcSet="/images/klikdat_logo_empty.png" type="image/jpeg" media="(min-width: 400px)" width="100%" height="45px" alt="big" />
+                            <source srcSet="/images/k_cropped.png" type="image/jpeg" media="(min-width: 360px)" width="100%" height="45px" alt="small" />
+                            <img src="/images/k_cropped.png" min-width="360px" width="100%" height="45px" alt="backup" className="d-inline-block align-top" />
+                        </picture>
+                        {/* <img src="/images/klikdat_logo_empty.png" width="100%" height="100%" /> */}
                     </a></Link>
+
                     <button className="btn btn-link btn-sm order-1 order-lg-1" id="sidebarToggle" onClick={toggleMenu}><i className="fas fa-2x fa-bars"></i></button>
                     <button className="btn btn-link btn-sm order-2 order-lg-2" id="jobs"><i className="fas fa-2x fa-briefcase"></i></button>
                     <button className="btn btn-link btn-sm order-3 order-lg-3" id="properties"><i className="fas fa-2x fa-home"></i></button>
                     <button className="btn btn-link btn-sm order-4 order-lg-4" id="properties"><i className="fas fa-2x fa-car"></i></button>
-                                        
+
                     <form className="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0 order-5 order-lg-5">
                         <div className="input-group">
                             <input className="form-control" type="text" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2" />
@@ -67,11 +76,11 @@ export default function Layout(props) {
                                 <button className="btn btn-primary" type="button"><i className="fas fa-search"></i></button>
                             </div>
                         </div>
-                    </form>                    
+                    </form>
 
-                    <ul className="navbar-nav ml-auto ml-md-0 order-6 order-lg-6">                        
+                    <ul className="navbar-nav ml-auto ml-md-0 order-6 order-lg-6">
                         {auth === false &&
-                            <React.Fragment>                            
+                            <React.Fragment>
                                 <li className="nav-item"><Link href="/users/login"><a className="nav-link">login</a></Link></li>
                                 <li className="nav-item"><Link href="/users/register"><a className="nav-link">register</a></Link></li>
                             </React.Fragment>
@@ -99,13 +108,17 @@ export default function Layout(props) {
                             <div className="sb-sidenav-menu">
                                 <div className="nav">
                                     <div className="sb-sidenav-menu-heading">Core</div>
-                                    <a className="nav-link" href="index.html"><div className="sb-nav-link-icon"><i className="fas fa-tachometer-alt"></i></div>Dashboard</a>
+                                    <a className="nav-link" href="/"><div className="sb-nav-link-icon"><i className="fas fa-tachometer-alt"></i></div>Dashboard</a>
                                     <div className="sb-sidenav-menu-heading">Interface</div>
-                                    <a className="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts"><div className="sb-nav-link-icon"><i className="fas fa-columns"></i></div>Layouts<div className="sb-sidenav-collapse-arrow"><i className="fas fa-angle-down"></i></div></a>
+                                    <a className="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts"><div className="sb-nav-link-icon"><i className="fas fa-columns"></i></div>Sandbox<div className="sb-sidenav-collapse-arrow"><i className="fas fa-angle-down"></i></div></a>
                                     <div className="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-parent="#sidenavAccordion">
                                         <nav className="sb-sidenav-menu-nested nav">
-                                            <a className="nav-link" href="layout-static.html">Static Navigation</a>
-                                            <a className="nav-link" href="layout-sidenav-light.html">Light Sidenav</a></nav>
+                                            <Link href="/sandbox/fontawesome"><a className="nav-link">FontAwesome</a></Link>
+                                            <Link href="/sandbox/mapping"><a className="nav-link">Mapping</a></Link>
+                                            <Link href="/sandbox/spinner"><a className="nav-link">Spinner</a></Link>
+                                            <Link href="/sandbox/state"><a className="nav-link">State</a></Link>
+                                            <Link href="/sandbox/toast"><a className="nav-link">Toast</a></Link>
+                                        </nav>
                                     </div>
                                     <a className="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="false" aria-controls="collapsePages"><div className="sb-nav-link-icon"><i className="fas fa-book-open"></i></div>Pages<div className="sb-sidenav-collapse-arrow"><i className="fas fa-angle-down"></i></div></a>
                                     <div className="collapse" id="collapsePages" aria-labelledby="headingTwo" data-parent="#sidenavAccordion">
@@ -134,7 +147,7 @@ export default function Layout(props) {
                                     <Link href="/places/read"><a className="nav-link"><div className="sb-nav-link-icon"><i className="fas fa-table"></i></div>Places</a></Link>
                                     <Link href="/sandbox/mapping"><a className="nav-link"><div className="sb-nav-link-icon"><i className="fas fa-table"></i></div>Test - Map</a></Link>
                                     <Link href="/profile"><a className="nav-link"><div className="sb-nav-link-icon"><i className="fas fa-table"></i></div>Profile</a></Link>
-                                    <Link href="/test"><a className="nav-link"><div className="sb-nav-link-icon"><i className="fas fa-table"></i></div>Test</a></Link>                                    
+                                    <Link href="/test"><a className="nav-link"><div className="sb-nav-link-icon"><i className="fas fa-table"></i></div>Test</a></Link>
                                 </div>
                             </div>
                             <div className="sb-sidenav-footer">
@@ -154,6 +167,21 @@ export default function Layout(props) {
                                 <ol className="breadcrumb mb-4">
                                     <li className="breadcrumb-item active">Dashboard</li>
                                 </ol>
+                                <div>
+                                    {loading === true &&
+                                        <React.Fragment>
+                                            <div>
+                                                <Loader handleSpinner={handleSpinner}
+                                                    type="Rings"
+                                                    color="#00BFFF"
+                                                    height={50}
+                                                    width={50}
+
+                                                />
+                                            </div>
+                                        </React.Fragment>
+                                    }
+                                </div>
                                 {props.children}
                             </div>
                         </main>

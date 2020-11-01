@@ -1,6 +1,8 @@
 import React from 'react';
 import '../styles/global.css'
+import '../styles/user_global.css'
 import 'leaflet/dist/leaflet.css'
+import "react-loader-spinner/dist/loader/css/react-spinner-loader.css"
 import App from 'next/app';
 import cookie from 'cookie';
 import { AuthProvider } from '../providers/Auth';
