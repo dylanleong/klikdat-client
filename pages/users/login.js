@@ -3,15 +3,16 @@ import MyLayout from "../../components/layout";
 import { useAuth } from '../../providers/Auth';
 import withoutAuth from '../../hocs/withoutAuth';
 import { useToasts } from '../../providers/Toast';
+import Link from 'next/link'
 import axios from 'axios'
 import Head from 'next/head'
 import Router from 'next/router'
 import cookie from 'js-cookie'
-import Loader from 'react-loader-spinner'
+import LoadingOverlay from 'react-loading-overlay';
 
-function Login() {
+function Login() {    
     const { setAuthenticated } = useAuth();
-
+    
     const [form, setState] = useState({
         username: '',
         password: '',
@@ -47,7 +48,8 @@ function Login() {
             cookie.set('id', response.data.id)
             cookie.set('username', response.data.username)
             cookie.set('first_name', response.data.first_name)
-            Router.push('/test')
+            // Router.push('/test')
+            Router.back()
             add("User Logged in Successfully!")
             setLoading(false)
         } else {
@@ -63,18 +65,11 @@ function Login() {
                 <title>{title}</title>
             </Head>
             <MyLayout>
-                {loading === true &&
-                    <React.Fragment>
-                        <div>
-                            <Loader
-                                type="Rings"
-                                color="#00BFFF"
-                                height={50}
-                                width={50}
-                            />
-                        </div>
-                    </React.Fragment>
-                }
+            <LoadingOverlay
+                active={loading}
+                spinner
+                text='Logging In...'>
+                
                 <div className="container">
                     <div className="row justify-content-center">
                         <div className="col-lg-5">
@@ -96,12 +91,13 @@ function Login() {
                                     </form>
                                 </div>
                                 <div className="card-footer text-center">
-                                    <div className="small"><a href="register.html">Need an account? Sign up!</a></div>
+                                    <div className="small"><Link href="/users/register"><a className="nav-link">Register</a></Link></div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
+                </LoadingOverlay>
             </MyLayout>
         </>
     )

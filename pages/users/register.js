@@ -4,6 +4,7 @@ import withoutAuth from '../../hocs/withoutAuth';
 import { useToasts } from '../../providers/Toast';
 import axios from 'axios'
 import Head from 'next/head'
+import Link from 'next/link'
 import Router from 'next/router'
 
 function Register() {
@@ -96,7 +97,7 @@ function Register() {
                                 </form>
                             </div>
                             <div className="card-footer text-center">
-                                <div className="small"><a href="register.html">Have an account? Go to login</a></div>
+                                <div className="small"><div className="small"><Link href="/users/login"><a className="nav-link">Login</a></Link></div></div>
                             </div>
                         </div>
                     </div>

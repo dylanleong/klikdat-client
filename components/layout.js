@@ -1,6 +1,7 @@
 import Head from 'next/head'
 import Link from 'next/link'
 import React, { useState } from "react";
+import { Breadcrumbs } from './breadcrumbs'
 import { userIsAuthenticated } from '../providers/Auth';
 import cookie from 'js-cookie'
 import Loader from 'react-loader-spinner'
@@ -27,6 +28,7 @@ export default function Layout(props) {
 
     const d = new Date()
     const cYear = d.getFullYear()
+    const myBread = Breadcrumbs()
 
     const auth = userIsAuthenticated()
     return (
@@ -113,6 +115,7 @@ export default function Layout(props) {
                                     <a className="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts"><div className="sb-nav-link-icon"><i className="fas fa-columns"></i></div>Sandbox<div className="sb-sidenav-collapse-arrow"><i className="fas fa-angle-down"></i></div></a>
                                     <div className="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-parent="#sidenavAccordion">
                                         <nav className="sb-sidenav-menu-nested nav">
+                                            <Link href="/sandbox/chat"><a className="nav-link">Chat</a></Link>
                                             <Link href="/sandbox/fontawesome"><a className="nav-link">FontAwesome</a></Link>
                                             <Link href="/sandbox/mapping"><a className="nav-link">Mapping</a></Link>
                                             <Link href="/sandbox/spinner"><a className="nav-link">Spinner</a></Link>
@@ -163,10 +166,7 @@ export default function Layout(props) {
                     <div id="layoutSidenav_content">
                         <main>
                             <div className="container-fluid">
-                                <h1 className="mt-4">Dashboard</h1>
-                                <ol className="breadcrumb mb-4">
-                                    <li className="breadcrumb-item active">Dashboard</li>
-                                </ol>
+                                <div>{myBread}</div>
                                 <div>
                                     {loading === true &&
                                         <React.Fragment>
