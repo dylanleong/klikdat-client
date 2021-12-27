@@ -113,6 +113,7 @@ export default function Layout(props) {
                                     <a className="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts"><div className="sb-nav-link-icon"><i className="fas fa-columns"></i></div>Sandbox<div className="sb-sidenav-collapse-arrow"><i className="fas fa-angle-down"></i></div></a>
                                     <div className="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-parent="#sidenavAccordion">
                                         <nav className="sb-sidenav-menu-nested nav">
+                                            <Link href="/sandbox/chat"><a className="nav-link">Chat</a></Link>
                                             <Link href="/sandbox/fontawesome"><a className="nav-link">FontAwesome</a></Link>
                                             <Link href="/sandbox/mapping"><a className="nav-link">Mapping</a></Link>
                                             <Link href="/sandbox/spinner"><a className="nav-link">Spinner</a></Link>
