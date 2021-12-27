@@ -1,6 +1,7 @@
 import Head from 'next/head'
 import Link from 'next/link'
 import React, { useState } from "react";
+import { Breadcrumbs } from './breadcrumbs'
 import { userIsAuthenticated } from '../providers/Auth';
 import cookie from 'js-cookie'
 import Loader from 'react-loader-spinner'
@@ -27,6 +28,7 @@ export default function Layout(props) {
 
     const d = new Date()
     const cYear = d.getFullYear()
+    const myBread = Breadcrumbs()
 
     const auth = userIsAuthenticated()
     return (
@@ -164,10 +166,7 @@ export default function Layout(props) {
                     <div id="layoutSidenav_content">
                         <main>
                             <div className="container-fluid">
-                                <h1 className="mt-4">Dashboard</h1>
-                                <ol className="breadcrumb mb-4">
-                                    <li className="breadcrumb-item active">Dashboard</li>
-                                </ol>
+                                <div>{myBread}</div>
                                 <div>
                                     {loading === true &&
                                         <React.Fragment>
