@@ -68,7 +68,7 @@ function Login() {
             <LoadingOverlay
                 active={loading}
                 spinner
-                text='Logging In...'>
+                text='Logging In to Klikdat...'>
                 
                 <div className="container">
                     <div className="row justify-content-center">
