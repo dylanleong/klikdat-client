@@ -138,8 +138,7 @@ export default function Layout(props) {
                                             <div className="collapse" id="pagesCollapseError" aria-labelledby="headingOne" data-parent="#sidenavAccordionPages">
                                                 <nav className="sb-sidenav-menu-nested nav">
                                                     <a className="nav-link" href="401.html">401 Page</a>
-                                                    <a className="nav-link" href="404.html">404 Page</a>
-                                                    <a className="nav-link" href="500.html">500 Page</a>
+                                                    <a className="nav-link" href="404.html">404 Page</a>                                                    
                                                 </nav>
                                             </div>
                                         </nav>
