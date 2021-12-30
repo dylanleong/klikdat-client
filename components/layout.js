@@ -9,16 +9,30 @@ import Loader from 'react-loader-spinner'
 export const siteTitle = 'klikdat'
 
 export default function Layout(props) {
+    // left sidebar
     const [showSideNav, setSideNav] = useState(true);
     const [sideVis, setSideVis] = useState('');
-    const [loading, setLoading] = useState(false)
-
+    
     const toggleMenu = () => {
         setSideNav(!showSideNav)
         setSideVis(showSideNav ? 'sb-sidenav-toggled' : '')
         console.log(showSideNav)
         console.log(sideVis)
     }
+
+    // right sidebar
+    const [showRightNav, setRightNav] = useState(true);
+    const [rightVis, setRightVis] = useState('');
+    
+    const toggleRightMenu = () => {
+        setRightNav(!showRightNav)
+        setRightVis(showRightNav ? 'sb-rightnav-toggled' : '')
+        console.log(showRightNav)
+        console.log(rightVis)
+    }
+
+
+    const [loading, setLoading] = useState(false)
 
     const handleSpinner = () => {
         setLoading(!loading)
@@ -31,6 +45,14 @@ export default function Layout(props) {
     const myBread = Breadcrumbs()
 
     const auth = userIsAuthenticated()
+
+    var initial = String
+    if (auth === true) {
+        initial = cookie.get('first_name')
+        if (typeof initial !== 'undefined') {
+            initial = initial.substring(0,1)
+        }        
+    }
     return (
         <div>
             <Head>
@@ -55,7 +77,7 @@ export default function Layout(props) {
 
             </Head>
 
-            <div className={`sb-nav-fixed ${sideVis}`}>
+            <div className={`sb-nav-fixed ${sideVis} ${rightVis}`}>
                 <nav className="sb-topnav navbar navbar-expand navbar-dark bg-dark">
                     <Link href="/"><a className="navbar-brand">
                         <picture className="order-0 order-lg-0">
@@ -89,19 +111,19 @@ export default function Layout(props) {
                         }
                         {auth === true &&
                             <React.Fragment>
-                                <li className="nav-item"><a className="nav-link">{cookie.get('first_name')}</a></li>
+                                <li className="nav-item"><a className="nav-link">{initial}</a></li>
                                 <li className="nav-item dropdown">
-                                    <a className="nav-link dropdown-toggle" id="userDropdown" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i className="fas fa-user fa-fw"></i></a>
+                                    <a className="nav-link dropdown-toggle" id="userDropdown" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i className="fas fa-user fa-2x"></i></a>
                                     <div className="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
                                         <Link href="/users/profile"><a className="dropdown-item" href="#">profile</a></Link>
                                         <a className="dropdown-item" href="#">settings</a>
                                         <div className="dropdown-divider"></div>
                                         <Link href="/users/logout"><a className="dropdown-item">logout</a></Link>
                                     </div>
-                                </li>
+                                </li>                                
                             </React.Fragment>
                         }
-
+                        <button className="btn btn-link btn-sm order-1 order-lg-1" id="rightbarToggle" onClick={toggleRightMenu}><i className="fas fa-2x fa-filter"></i></button>
                     </ul>
                 </nav>
                 <div id="layoutSidenav">
@@ -109,8 +131,13 @@ export default function Layout(props) {
                         <nav className="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
                             <div className="sb-sidenav-menu">
                                 <div className="nav">
-                                    <div className="sb-sidenav-menu-heading">Core</div>
-                                    <a className="nav-link" href="/"><div className="sb-nav-link-icon"><i className="fas fa-tachometer-alt"></i></div>Dashboard</a>
+                                    <div className="sb-sidenav-menu-heading">Tools</div>                                    
+                                    <a className="nav-link collapsed" href="#" data-toggle="collapse" data-target="#measurementsCollapseLayouts" aria-expanded="false" aria-controls="measurementsCollapseLayouts"><div className="sb-nav-link-icon"><i className="fas fa-columns"></i></div>Measurements<div className="sb-sidenav-collapse-arrow"><i className="fas fa-angle-down"></i></div></a>
+                                    <div className="collapse" id="measurementsCollapseLayouts" aria-labelledby="headingOne" data-parent="#sidenavAccordion">
+                                        <nav className="sb-sidenav-menu-nested nav">
+                                            <Link href="/measurements/shoesize"><a className="nav-link">Shoe Size</a></Link>                                            
+                                        </nav>
+                                    </div>
                                     <div className="sb-sidenav-menu-heading">Interface</div>
                                     <a className="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts"><div className="sb-nav-link-icon"><i className="fas fa-columns"></i></div>Sandbox<div className="sb-sidenav-collapse-arrow"><i className="fas fa-angle-down"></i></div></a>
                                     <div className="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-parent="#sidenavAccordion">
@@ -149,7 +176,7 @@ export default function Layout(props) {
                                     <Link href="/places/read"><a className="nav-link"><div className="sb-nav-link-icon"><i className="fas fa-table"></i></div>Places</a></Link>
                                     <Link href="/sandbox/mapping"><a className="nav-link"><div className="sb-nav-link-icon"><i className="fas fa-table"></i></div>Test - Map</a></Link>
                                     <Link href="/profile"><a className="nav-link"><div className="sb-nav-link-icon"><i className="fas fa-table"></i></div>Profile</a></Link>
-                                    <Link href="/test"><a className="nav-link"><div className="sb-nav-link-icon"><i className="fas fa-table"></i></div>Test</a></Link>
+                                    <Link href="/test"><a className="nav-link"><div className="sb-nav-link-icon"><i className="fas fa-filter"></i></div>Test</a></Link>
                                 </div>
                             </div>
                             <div className="sb-sidenav-footer">
@@ -196,6 +223,17 @@ export default function Layout(props) {
                                 </div>
                             </div>
                         </footer>
+                    </div>
+                    <div id="layoutRightnav_nav">
+                        <nav className="sb-rightnav accordion sb-rightnav-dark" id="rightnavAccordion">
+                            <div className="sb-rightnav-menu">
+                                <div className="nav">
+                                    <div className="sb-rightnav-menu-heading">Filter</div>
+                                    <a className="nav-link" href="/"><div className="sb-nav-link-icon"><i className="fas fa-tachometer-alt"></i></div>RightBoard</a>
+                                    <div className="sb-rightnav-menu-heading">Interface</div>                                                                    
+                                </div>
+                            </div>                            
+                        </nav>
                     </div>
                 </div>
 
