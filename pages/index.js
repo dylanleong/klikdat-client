@@ -25,6 +25,10 @@ return (
       <br />
       {/* {'JWT - ' + cookie.get('token')} */}
     </p>
+    <div className="container p-3">
+      <button className="btn btn-primary m-3">KindaCode.com</button>
+      <button className="btn btn-warning m-3">Hello</button>
+    </div>
     <p>
       <Link href="/account">
         <a>Go: Account</a>

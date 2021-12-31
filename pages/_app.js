@@ -1,4 +1,5 @@
 import React from 'react';
+import 'bootstrap/dist/css/bootstrap.css';
 import '../styles/global.css'
 import '../styles/user_global.css'
 import 'leaflet/dist/leaflet.css'
@@ -9,6 +10,7 @@ import { AuthProvider } from '../providers/Auth';
 import { ToastProvider } from '../providers/Toast';
 import jwt_decode from 'jwt-decode'
 import axios from 'axios'
+import { useEffect } from "react";
 
 // fix Fontawesome bug in NextJS production build. FAS works correctly in dev without these lines
 import { config } from '@fortawesome/fontawesome-svg-core'
@@ -16,6 +18,10 @@ import '@fortawesome/fontawesome-svg-core/styles.css'
 config.autoAddCss = false
 
 function MyApp({ Component, pageProps, authenticated }) {
+    useEffect(() => {
+        import("bootstrap/dist/js/bootstrap");
+      }, []);
+      
     const Layout = Component.Layout ? Component.Layout : React.Fragment    
 
     return (          
