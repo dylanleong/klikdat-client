@@ -3,7 +3,6 @@ import 'bootstrap/dist/css/bootstrap.css';
 import '../styles/global.css'
 import '../styles/user_global.css'
 import 'leaflet/dist/leaflet.css'
-import 'react-loader-spinner/dist/loader/css/react-spinner-loader.css'
 
 import 'sidebar-skeleton-compostrap/dist/css/sidebar.css'
 import 'open-sans-fontface/open-sans.css'
