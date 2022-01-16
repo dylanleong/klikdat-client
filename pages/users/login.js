@@ -8,7 +8,7 @@ import axios from 'axios'
 import Head from 'next/head'
 import Router from 'next/router'
 import cookie from 'js-cookie'
-import LoadingOverlay from 'react-loading-overlay';
+import LoadingOverlay from 'react-loading-overlay-ts';
 
 function Login() {    
     const { setAuthenticated } = useAuth();

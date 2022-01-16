@@ -3,7 +3,14 @@ import 'bootstrap/dist/css/bootstrap.css';
 import '../styles/global.css'
 import '../styles/user_global.css'
 import 'leaflet/dist/leaflet.css'
-import "react-loader-spinner/dist/loader/css/react-spinner-loader.css"
+import 'react-loader-spinner/dist/loader/css/react-spinner-loader.css'
+
+import 'sidebar-skeleton-compostrap/dist/css/sidebar.css'
+import 'open-sans-fontface/open-sans.css'
+import '@fortawesome/fontawesome-free/css/all.css'
+import 'perfect-scrollbar/css/perfect-scrollbar.css'
+import 'sidebar-menu-compostrap/dist/css/sidebar.menu.css'
+
 import App from 'next/app';
 import cookie from 'cookie';
 import { AuthProvider } from '../providers/Auth';
@@ -19,9 +26,13 @@ config.autoAddCss = false
 
 function MyApp({ Component, pageProps, authenticated }) {
     useEffect(() => {
-        import("bootstrap/dist/js/bootstrap");
-      }, []);
-      
+        import("bootstrap/dist/js/bootstrap");    
+        import("sidebar-skeleton-compostrap/dist/js/sidebar");        
+        import("perfect-scrollbar/dist/perfect-scrollbar");
+        import("nanobar/nanobar");
+        import("sidebar-menu-compostrap/dist/js/sidebar.menu");
+    }, []);
+         
     const Layout = Component.Layout ? Component.Layout : React.Fragment    
 
     return (          

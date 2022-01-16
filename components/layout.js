@@ -4,34 +4,11 @@ import React, { useState } from "react";
 import { Breadcrumbs } from './breadcrumbs'
 import { userIsAuthenticated } from '../providers/Auth';
 import cookie from 'js-cookie'
-import Loader from 'react-loader-spinner'
+
 
 export const siteTitle = 'klikdat'
 
 export default function Layout(props) {
-    // left sidebar
-    const [showSideNav, setSideNav] = useState(true);
-    const [sideVis, setSideVis] = useState('');
-
-    const toggleMenu = () => {
-        setSideNav(!showSideNav)
-        setSideVis(showSideNav ? 'sb-sidenav-toggled' : '')
-        console.log(showSideNav)
-        console.log(sideVis)
-    }
-
-    // right sidebar
-    const [showRightNav, setRightNav] = useState(true);
-    const [rightVis, setRightVis] = useState('');
-
-    const toggleRightMenu = () => {
-        setRightNav(!showRightNav)
-        setRightVis(showRightNav ? 'sb-rightnav-toggled' : '')
-        console.log(showRightNav)
-        console.log(rightVis)
-    }
-
-
     const [loading, setLoading] = useState(false)
 
     const handleSpinner = () => {
@@ -72,15 +49,11 @@ export default function Layout(props) {
                 <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/js/all.min.js" crossOrigin="anonymous"></script>
                 <script src="https://code.jquery.com/jquery-3.4.1.min.js" crossOrigin="anonymous"></script>
                 <script type="text/javascript" src="/scripts.js"></script>
-                <script src="https://code.jquery.com/jquery-3.4.1.min.js" crossOrigin="anonymous"></script>
-                {/* <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js" crossOrigin="anonymous"></script> */}
-
+                <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet"></link>
             </Head>
 
             <nav className="navbar navbar-expand navbar-dark bg-dark fixed-top">
                 <div className="container-fluid">
-
-
                     <div className="me-auto" id="navbarLeft">
                         <ul className="navbar-nav">
                             <li className="nav-item w-25">
@@ -112,42 +85,174 @@ export default function Layout(props) {
                         </ul>
                     </div>
                     <div className="ms-auto" id="navbarRight">
-                        <button className="btn btn-link btn-sm order-1 order-lg-1" type="button" data-bs-toggle="offcanvas" data-bs-target="#rightMenu" aria-controls="rightMenu" aria-expanded="false" aria-label="Toggle navigation">
-                            <i className="fas fa-2x fa-filter"></i>
-                        </button>
+                        <ul className="navbar-nav ml-auto ml-md-0 order-6 order-lg-6">
+                            {auth === false &&
+                                <React.Fragment>
+                                    <li className="nav-item"><Link href="/users/login"><a className="nav-link">login</a></Link></li>
+                                    <li className="nav-item"><Link href="/users/register"><a className="nav-link">register</a></Link></li>
+                                </React.Fragment>
+                            }
+                            {auth === true &&
+                                <React.Fragment>
+                                    <li className="nav-item"><a className="nav-link">{initial}</a></li>
+                                    <li className="nav-item dropdown">
+                                        <a className="nav-link dropdown-toggle" id="userDropdown" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i className="fas fa-user fa-2x"></i></a>
+                                        <div className="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
+                                            <Link href="/users/profile"><a className="dropdown-item" href="#">profile</a></Link>
+                                            <a className="dropdown-item" href="#">settings</a>
+                                            <div className="dropdown-divider"></div>
+                                            <Link href="/users/logout"><a className="dropdown-item">logout</a></Link>
+                                        </div>
+                                    </li>
+                                </React.Fragment>
+                            }
+                            <li>
+                                <button className="btn btn-link btn-sm order-1 order-lg-1" type="button" data-bs-toggle="offcanvas" data-bs-target="#rightMenu" aria-controls="rightMenu" aria-expanded="false" aria-label="Toggle navigation">
+                                    <i className="fas fa-2x fa-filter"></i>
+                                </button>
+
+                            </li>
+                        </ul>
+
 
                     </div>
+
                 </div>
             </nav>
 
             <div className="offcanvas offcanvas-start" tabIndex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
-                <div className="offcanvas-header">
-                    <h5 className="offcanvas-title" id="offcanvasExampleLabel">Offcanvas</h5>
+                <div className="offcanvas-header bg-dark text-white">
+                    <h5 className="offcanvas-title" id="offcanvasExampleLabel">Menu</h5>
                     <button type="button" className="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
                 </div>
-                <div className="offcanvas-body">
-                    <div>
-                        Some text as placeholder. In real life you can have the elements you have chosen. Like, text, images, lists, etc.
-                        </div>
+                <div className="offcanvas-body bg-dark text-white">
+                    <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
+                        <li><Link href="/"><a className="nav-link px-0 align-middle"><i class="fs-4 bi-house"></i> <span class="ms-1 d-none d-sm-inline">Home</span></a></Link></li>
+                        <li><Link href="/measurements/shoesize"><a className="nav-link px-0 align-middle"><i class="fs-4 bi-table"></i> <span class="ms-1 d-none d-sm-inline">Shoe Size</span></a></Link></li>
+                        <li>
+                            <a href="#submenu1" data-bs-toggle="collapse" class="nav-link px-0 align-middle"><i class="fs-4 bi-speedometer2"></i> <span class="ms-1 d-none d-sm-inline">Sandbox</span> </a>
+                            <ul class="collapse show nav flex-column ms-1" id="submenu1" data-bs-parent="#menu">
+                                <li><Link href="/sandbox/chat"><a className="nav-link px-0 align-middle"><i class="fs-4 bi-table"></i> <span class="ms-1 d-none d-sm-inline">Chat</span></a></Link></li>
+                                <li><Link href="/sandbox/fontawesome"><a className="nav-link">FontAwesome</a></Link></li>
+                                <li><Link href="/sandbox/mapping"><a className="nav-link">Mapping</a></Link></li>
+                                <li><Link href="/sandbox/spinner"><a className="nav-link">Spinner</a></Link></li>
+                                <li><Link href="/sandbox/state"><a className="nav-link">State</a></Link></li>
+                                <li><Link href="/sandbox/toast"><a className="nav-link">Toast</a></Link></li>                                
+                            </ul>
+                        </li>
+                        <li><Link href="/tic"><a className="nav-link px-0 align-middle"><i class="fs-4 bi-table"></i> <span class="ms-1 d-none d-sm-inline">Tic-Tac-Toe</span></a></Link></li>
+                        <li><Link href="/places/read"><a className="nav-link px-0 align-middle"><i class="fs-4 bi-table"></i> <span class="ms-1 d-none d-sm-inline">Places</span></a></Link></li>
+                        <li><Link href="/sandbox/mapping"><a className="nav-link px-0 align-middle"><i class="fs-4 bi-table"></i> <span class="ms-1 d-none d-sm-inline">Test - Map</span></a></Link></li>
+                        <li><Link href="/profile"><a className="nav-link px-0 align-middle"><i class="fs-4 bi-table"></i> <span class="ms-1 d-none d-sm-inline">Profile</span></a></Link></li>
+                        <li><Link href="/test"><a className="nav-link px-0 align-middle"><i class="fs-4 bi-table"></i> <span class="ms-1 d-none d-sm-inline">Test</span></a></Link></li>
+                    </ul>
 
                 </div>
             </div>
 
             <div className="offcanvas offcanvas-end" tabIndex="-1" id="rightMenu" aria-labelledby="rightMenuLabel">
-                <div className="offcanvas-header">
-                    <h5 className="offcanvas-title" id="offcanvasExampleLabel">Offcanvas</h5>
+                <div className="offcanvas-header bg-dark text-white">
+                    <h5 className="offcanvas-title" id="offcanvasExampleLabel">Filter</h5>
                     <button type="button" className="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
                 </div>
-                <div className="offcanvas-body">
-                    <div>
-                        Some text as placeholder. In real life you can have the elements you have chosen. Like, text, images, lists, etc.
-                        </div>
-
+                <div className="offcanvas-body bg-dark text-white">
+                    <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link align-middle px-0">
+                                <i class="fs-4 bi-house"></i> <span class="ms-1 d-none d-sm-inline">Home</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#submenu1" data-bs-toggle="collapse" class="nav-link px-0 align-middle">
+                                <i class="fs-4 bi-speedometer2"></i> <span class="ms-1 d-none d-sm-inline">Dashboard</span> </a>
+                            <ul class="collapse show nav flex-column ms-1" id="submenu1" data-bs-parent="#menu">
+                                <li class="w-100">
+                                    <a href="#" class="nav-link px-0"> <span class="d-none d-sm-inline">Item</span> 1 </a>
+                                </li>
+                                <li>
+                                    <a href="#" class="nav-link px-0"> <span class="d-none d-sm-inline">Item</span> 2 </a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="#" class="nav-link px-0 align-middle">
+                                <i class="fs-4 bi-table"></i> <span class="ms-1 d-none d-sm-inline">Orders</span></a>
+                        </li>
+                        <li>
+                            <a href="#submenu2" data-bs-toggle="collapse" class="nav-link px-0 align-middle ">
+                                <i class="fs-4 bi-bootstrap"></i> <span class="ms-1 d-none d-sm-inline">Bootstrap</span></a>
+                            <ul class="collapse nav flex-column ms-1" id="submenu2" data-bs-parent="#menu">
+                                <li class="w-100">
+                                    <a href="#" class="nav-link px-0"> <span class="d-none d-sm-inline">Item</span> 1</a>
+                                </li>
+                                <li>
+                                    <a href="#" class="nav-link px-0"> <span class="d-none d-sm-inline">Item</span> 2</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="#submenu3" data-bs-toggle="collapse" class="nav-link px-0 align-middle">
+                                <i class="fs-4 bi-grid"></i> <span class="ms-1 d-none d-sm-inline">Products</span> </a>
+                            <ul class="collapse nav flex-column ms-1" id="submenu3" data-bs-parent="#menu">
+                                <li class="w-100">
+                                    <a href="#" class="nav-link px-0"> <span class="d-none d-sm-inline">Product</span> 1</a>
+                                </li>
+                                <li>
+                                    <a href="#" class="nav-link px-0"> <span class="d-none d-sm-inline">Product</span> 2</a>
+                                </li>
+                                <li>
+                                    <a href="#" class="nav-link px-0"> <span class="d-none d-sm-inline">Product</span> 3</a>
+                                </li>
+                                <li>
+                                    <a href="#" class="nav-link px-0"> <span class="d-none d-sm-inline">Product</span> 4</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="#" class="nav-link px-0 align-middle">
+                                <i class="fs-4 bi-people"></i> <span class="ms-1 d-none d-sm-inline">Customers</span> </a>
+                        </li>
+                    </ul>
                 </div>
             </div>
 
+            <div id="layoutSidenav">
+                <div id="layoutSidenav_content">
+                    <main>
+                        <div className="container-fluid">
+                            <div>{myBread}</div>
+                            <div>
+                                {loading === true &&
+                                    <React.Fragment>
+                                        <div>
+                                            <Loader handleSpinner={handleSpinner}
+                                                type="Rings"
+                                                color="#00BFFF"
+                                                height={50}
+                                                width={50}
 
-
+                                            />
+                                        </div>
+                                    </React.Fragment>
+                                }
+                            </div>
+                            {props.children}
+                        </div>
+                    </main>
+                    <footer className="py-4 bg-light mt-auto">
+                        <div className="container-fluid">
+                            <div className="d-flex align-items-center justify-content-between small">
+                                <div className="text-muted">Copyright &copy; klikdat {cYear}</div>
+                                <div>
+                                    <a href="#">Privacy Policy</a>
+                            &middot;
+                            <a href="#">Terms &amp; Conditions</a>
+                                </div>
+                            </div>
+                        </div>
+                    </footer>
+                </div>
+            </div>
 
         </div>
     )

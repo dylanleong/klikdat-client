@@ -1,3 +1,5 @@
 .navbar-brand {
     min-width: 70px;
   }
+
+body { padding-top: 70px; }

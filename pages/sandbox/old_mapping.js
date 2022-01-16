@@ -2,22 +2,21 @@ import dynamic from 'next/dynamic'
 import React, { Component } from "react";
 import MyLayout from "../../components/layout";
 
-const MapContainer = dynamic(() => import('react-leaflet').then((module) => module.MapContainer), {
+const Map = dynamic(() => import('react-leaflet/lib/Map'), {
   ssr: false
-});
+})
 
-const TileLayer = dynamic(() => import('react-leaflet').then((module) => module.TileLayer), {
+const TileLayer = dynamic(() => import('react-leaflet/lib/TileLayer'), {
   ssr: false
-});
+})
 
-const Marker = dynamic(() => import('react-leaflet').then((module) => module.Marker), {
+const Marker = dynamic(() => import('react-leaflet/lib/Marker'), {
   ssr: false
-});
+})
 
-const Popup = dynamic(() => import('react-leaflet').then((module) => module.Popup), {
+const Popup = dynamic(() => import('react-leaflet/lib/Popup'), {
   ssr: false
-});
-
+})
 
 class ClientOnly extends React.Component {
   state = {
@@ -77,7 +76,7 @@ export default class Mapping extends Component {
           <div id="mapid">
             <button onClick={this.getLocation}>Get Current Location</button>
             <br/>
-            <MapContainer center={[this.state.mylat, this.state.mylng]} zoom={12} style={{ height: "700px", width: "100%" }} >
+            <Map center={[this.state.mylat, this.state.mylng]} zoom={12} style={{ height: "700px", width: "100%" }} >
               <TileLayer
                 url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                 attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
@@ -85,7 +84,7 @@ export default class Mapping extends Component {
               <Marker position={[this.state.mylat, this.state.mylng]}>
                 <Popup>Your Location<br />Easily customizable.</Popup>
               </Marker>
-            </MapContainer>
+            </Map>
           </div>
         </div>
       </ClientOnly>
