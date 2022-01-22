@@ -123,28 +123,26 @@ export default function Layout(props) {
             <div className="offcanvas offcanvas-start" tabIndex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
                 <div className="offcanvas-header bg-dark text-white">
                     <h5 className="offcanvas-title" id="offcanvasExampleLabel">Menu</h5>
-                    <button type="button" className="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                    <button type="button" className="btn-close btn-close-white text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
                 </div>
                 <div className="offcanvas-body bg-dark text-white">
-                    <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
-                        <li><Link href="/"><a className="nav-link px-0 align-middle"><i class="fs-4 bi-house"></i> <span class="ms-1 d-none d-sm-inline">Home</span></a></Link></li>
-                        <li><Link href="/measurements/shoesize"><a className="nav-link px-0 align-middle"><i class="fs-4 bi-table"></i> <span class="ms-1 d-none d-sm-inline">Shoe Size</span></a></Link></li>
+                    <ul className="nav nav-pills flex-column mb-sm-auto mb-0  align-items-sm-start" id="menu">
+                        <li><Link href="/"><a className="nav-link px-0 align-middle"><i className="fas fa-home"></i> <span className="ms-2 d-sm-inline">Home</span></a></Link></li>
+                        <li><Link href="/measurements/shoesize"><a className="nav-link px-0 align-middle"><i className="fas fa-shoe-prints"></i> <span className="ms-2 d-sm-inline">Shoe Size</span></a></Link></li>
                         <li>
-                            <a href="#submenu1" data-bs-toggle="collapse" class="nav-link px-0 align-middle"><i class="fs-4 bi-speedometer2"></i> <span class="ms-1 d-none d-sm-inline">Sandbox</span> </a>
-                            <ul class="collapse show nav flex-column ms-1" id="submenu1" data-bs-parent="#menu">
-                                <li><Link href="/sandbox/chat"><a className="nav-link px-0 align-middle"><i class="fs-4 bi-table"></i> <span class="ms-1 d-none d-sm-inline">Chat</span></a></Link></li>
-                                <li><Link href="/sandbox/fontawesome"><a className="nav-link">FontAwesome</a></Link></li>
-                                <li><Link href="/sandbox/mapping"><a className="nav-link">Mapping</a></Link></li>
-                                <li><Link href="/sandbox/spinner"><a className="nav-link">Spinner</a></Link></li>
-                                <li><Link href="/sandbox/state"><a className="nav-link">State</a></Link></li>
-                                <li><Link href="/sandbox/toast"><a className="nav-link">Toast</a></Link></li>                                
+                            <a href="#submenu1" data-bs-toggle="collapse" className="nav-link px-0 align-middle"><i className="fas fa-play"></i> <span className="ms-2 d-sm-inline">Playpen </span><i className="ms-1 fas fa-angle-down rotate-icon"></i></a>
+                            <ul className="collapse  nav flex-column ms-1" id="submenu1" data-bs-parent="#menu">
+                                <li><Link href="/sandbox/chat"><a className="nav-link"><i className="fas fa-comments"></i> <span className="ms-2 d-sm-inline">Chat</span></a></Link></li>                                
+                                <li><Link href="/sandbox/fontawesome"><a className="nav-link"><i className="fab fa-font-awesome"></i><span className="ms-2 d-sm-inline">FontAwesome</span></a></Link></li>
+                                <li><Link href="/sandbox/mapping"><a className="nav-link"><i className="fas fa-map-marker-alt"></i><span className="ms-2 d-sm-inline">Map</span></a></Link></li>
+                                <li><Link href="/sandbox/state"><a className="nav-link"><i className="fas fa-globe-europe"></i><span className="ms-2 d-sm-inline">State</span></a></Link></li>
+                                <li><Link href="/sandbox/toast"><a className="nav-link"><i className="fas fa-bread-slice"></i><span className="ms-2 d-sm-inline">Toast</span></a></Link></li>                                                     
                             </ul>
                         </li>
-                        <li><Link href="/tic"><a className="nav-link px-0 align-middle"><i class="fs-4 bi-table"></i> <span class="ms-1 d-none d-sm-inline">Tic-Tac-Toe</span></a></Link></li>
-                        <li><Link href="/places/read"><a className="nav-link px-0 align-middle"><i class="fs-4 bi-table"></i> <span class="ms-1 d-none d-sm-inline">Places</span></a></Link></li>
-                        <li><Link href="/sandbox/mapping"><a className="nav-link px-0 align-middle"><i class="fs-4 bi-table"></i> <span class="ms-1 d-none d-sm-inline">Test - Map</span></a></Link></li>
-                        <li><Link href="/profile"><a className="nav-link px-0 align-middle"><i class="fs-4 bi-table"></i> <span class="ms-1 d-none d-sm-inline">Profile</span></a></Link></li>
-                        <li><Link href="/test"><a className="nav-link px-0 align-middle"><i class="fs-4 bi-table"></i> <span class="ms-1 d-none d-sm-inline">Test</span></a></Link></li>
+                        <li><Link href="/tic"><a className="nav-link px-0 align-middle"><i className="fas fa-th"></i> <span className="ms-2 d-sm-inline">Tic-Tac-Toe</span></a></Link></li>
+                        <li><Link href="/places/read"><a className="nav-link px-0 align-middle"><i className="fas fa-globe-europe"></i> <span className="ms-2 d-sm-inline">Places</span></a></Link></li>                        
+                        <li><Link href="/profile"><a className="nav-link px-0 align-middle"><i className="fas fa-user"></i> <span className="ms-2 d-sm-inline">Profile</span></a></Link></li>
+                        <li><Link href="/test"><a className="nav-link px-0 align-middle"><i className="fas fa-vial"></i> <span className="ms-2 d-sm-inline">Test</span></a></Link></li>
                     </ul>
 
                 </div>
@@ -156,61 +154,61 @@ export default function Layout(props) {
                     <button type="button" className="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
                 </div>
                 <div className="offcanvas-body bg-dark text-white">
-                    <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
-                        <li class="nav-item">
-                            <a href="#" class="nav-link align-middle px-0">
-                                <i class="fs-4 bi-house"></i> <span class="ms-1 d-none d-sm-inline">Home</span>
+                    <ul className="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
+                        <li className="nav-item">
+                            <a href="#" className="nav-link align-middle px-0">
+                                <i className="fs-4 bi-house"></i> <span className="ms-2 d-sm-inline">Home</span>
                             </a>
                         </li>
                         <li>
-                            <a href="#submenu1" data-bs-toggle="collapse" class="nav-link px-0 align-middle">
-                                <i class="fs-4 bi-speedometer2"></i> <span class="ms-1 d-none d-sm-inline">Dashboard</span> </a>
-                            <ul class="collapse show nav flex-column ms-1" id="submenu1" data-bs-parent="#menu">
-                                <li class="w-100">
-                                    <a href="#" class="nav-link px-0"> <span class="d-none d-sm-inline">Item</span> 1 </a>
+                            <a href="#submenu1" data-bs-toggle="collapse" className="nav-link px-0 align-middle">
+                                <i className="fs-4 bi-speedometer2"></i> <span className="ms-2 d-sm-inline">Dashboard</span> </a>
+                            <ul className="collapse show nav flex-column ms-1" id="submenu1" data-bs-parent="#menu">
+                                <li className="w-100">
+                                    <a href="#" className="nav-link px-0"> <span className="d-none d-sm-inline">Item</span> 1 </a>
                                 </li>
                                 <li>
-                                    <a href="#" class="nav-link px-0"> <span class="d-none d-sm-inline">Item</span> 2 </a>
+                                    <a href="#" className="nav-link px-0"> <span className="d-none d-sm-inline">Item</span> 2 </a>
                                 </li>
                             </ul>
                         </li>
                         <li>
-                            <a href="#" class="nav-link px-0 align-middle">
-                                <i class="fs-4 bi-table"></i> <span class="ms-1 d-none d-sm-inline">Orders</span></a>
+                            <a href="#" className="nav-link px-0 align-middle">
+                                <i className="fs-4 bi-table"></i> <span className="ms-2 d-sm-inline">Orders</span></a>
                         </li>
                         <li>
-                            <a href="#submenu2" data-bs-toggle="collapse" class="nav-link px-0 align-middle ">
-                                <i class="fs-4 bi-bootstrap"></i> <span class="ms-1 d-none d-sm-inline">Bootstrap</span></a>
-                            <ul class="collapse nav flex-column ms-1" id="submenu2" data-bs-parent="#menu">
-                                <li class="w-100">
-                                    <a href="#" class="nav-link px-0"> <span class="d-none d-sm-inline">Item</span> 1</a>
+                            <a href="#submenu2" data-bs-toggle="collapse" className="nav-link px-0 align-middle ">
+                                <i className="fs-4 bi-bootstrap"></i> <span className="ms-2 d-sm-inline">Bootstrap</span></a>
+                            <ul className="collapse nav flex-column ms-1" id="submenu2" data-bs-parent="#menu">
+                                <li className="w-100">
+                                    <a href="#" className="nav-link px-0"> <span className="d-none d-sm-inline">Item</span> 1</a>
                                 </li>
                                 <li>
-                                    <a href="#" class="nav-link px-0"> <span class="d-none d-sm-inline">Item</span> 2</a>
+                                    <a href="#" className="nav-link px-0"> <span className="d-none d-sm-inline">Item</span> 2</a>
                                 </li>
                             </ul>
                         </li>
                         <li>
-                            <a href="#submenu3" data-bs-toggle="collapse" class="nav-link px-0 align-middle">
-                                <i class="fs-4 bi-grid"></i> <span class="ms-1 d-none d-sm-inline">Products</span> </a>
-                            <ul class="collapse nav flex-column ms-1" id="submenu3" data-bs-parent="#menu">
-                                <li class="w-100">
-                                    <a href="#" class="nav-link px-0"> <span class="d-none d-sm-inline">Product</span> 1</a>
+                            <a href="#submenu3" data-bs-toggle="collapse" className="nav-link px-0 align-middle">
+                                <i className="fs-4 bi-grid"></i> <span className="ms-2 d-sm-inline">Products</span> </a>
+                            <ul className="collapse nav flex-column ms-1" id="submenu3" data-bs-parent="#menu">
+                                <li className="w-100">
+                                    <a href="#" className="nav-link px-0"> <span className="d-none d-sm-inline">Product</span> 1</a>
                                 </li>
                                 <li>
-                                    <a href="#" class="nav-link px-0"> <span class="d-none d-sm-inline">Product</span> 2</a>
+                                    <a href="#" className="nav-link px-0"> <span className="d-none d-sm-inline">Product</span> 2</a>
                                 </li>
                                 <li>
-                                    <a href="#" class="nav-link px-0"> <span class="d-none d-sm-inline">Product</span> 3</a>
+                                    <a href="#" className="nav-link px-0"> <span className="d-none d-sm-inline">Product</span> 3</a>
                                 </li>
                                 <li>
-                                    <a href="#" class="nav-link px-0"> <span class="d-none d-sm-inline">Product</span> 4</a>
+                                    <a href="#" className="nav-link px-0"> <span className="d-none d-sm-inline">Product</span> 4</a>
                                 </li>
                             </ul>
                         </li>
                         <li>
-                            <a href="#" class="nav-link px-0 align-middle">
-                                <i class="fs-4 bi-people"></i> <span class="ms-1 d-none d-sm-inline">Customers</span> </a>
+                            <a href="#" className="nav-link px-0 align-middle">
+                                <i className="fs-4 bi-people"></i> <span className="ms-2 d-sm-inline">Customers</span> </a>
                         </li>
                     </ul>
                 </div>

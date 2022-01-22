@@ -77,7 +77,8 @@ export default class Mapping extends Component {
           <div id="mapid">
             <button onClick={this.getLocation}>Get Current Location</button>
             <br/>
-            <MapContainer center={[this.state.mylat, this.state.mylng]} zoom={12} style={{ height: "700px", width: "100%" }} >
+            <MapContainer center={[this.state.mylat, this.state.mylng]} zoom={12} style={{ height: "700px", width: "100%" }} 
+            key={JSON.stringify([this.state.mylat, this.state.mylng])}>
               <TileLayer
                 url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                 attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
