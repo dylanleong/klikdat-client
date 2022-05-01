@@ -23,7 +23,7 @@ return (
       {console.log(process.env.API_HOST)}
       {console.log(process.env.GREETING)}
       <br />
-      {/* {'JWT - ' + cookie.get('token')} */}
+      {'JWT - ' + cookie.get('token')}
     </p>
     <div className="container p-3">
       <button className="btn btn-primary m-3">KindaCode.com</button>

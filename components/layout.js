@@ -56,6 +56,11 @@ export default function Layout(props) {
                 <div className="container-fluid">
                     <div className="me-auto" id="navbarLeft">
                         <ul className="navbar-nav">
+                            <li className="nav-item">
+                                <button className="navbar-toggler d-block" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample" aria-expanded="false" aria-label="Toggle navigation">
+                                    <span className="navbar-toggler-icon"></span>
+                                </button>
+                            </li>
                             <li className="nav-item w-25">
                                 <Link href="/">
                                     <a className="navbar-brand">
@@ -66,12 +71,7 @@ export default function Layout(props) {
                                         </picture>
                                     </a>
                                 </Link>
-                            </li>
-                            <li className="nav-item">
-                                <button className="navbar-toggler d-block" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample" aria-expanded="false" aria-label="Toggle navigation">
-                                    <span className="navbar-toggler-icon"></span>
-                                </button>
-                            </li>
+                            </li>                            
                             <li className="nav-item">
                                 <button className="btn btn-link btn-sm" id="jobs"><i className="fas fa-2x fa-briefcase"></i></button>
                             </li>
@@ -128,7 +128,7 @@ export default function Layout(props) {
                 <div className="offcanvas-body bg-dark text-white">
                     <ul className="nav nav-pills flex-column mb-sm-auto mb-0  align-items-sm-start" id="menu">
                         <li><Link href="/"><a className="nav-link px-0 align-middle"><i className="fas fa-home"></i> <span className="ms-2 d-sm-inline">Home</span></a></Link></li>
-                        <li><Link href="/measurements/shoesize"><a className="nav-link px-0 align-middle"><i className="fas fa-shoe-prints"></i> <span className="ms-2 d-sm-inline">Shoe Size</span></a></Link></li>
+                        <li><Link href="/measurements/shoesize/data_table"><a className="nav-link px-0 align-middle"><i className="fas fa-shoe-prints"></i> <span className="ms-2 d-sm-inline">Shoe Size</span></a></Link></li>
                         <li>
                             <a href="#submenu1" data-bs-toggle="collapse" className="nav-link px-0 align-middle"><i className="fas fa-play"></i> <span className="ms-2 d-sm-inline">Playpen </span><i className="ms-1 fas fa-angle-down rotate-icon"></i></a>
                             <ul className="collapse  nav flex-column ms-1" id="submenu1" data-bs-parent="#menu">
@@ -165,10 +165,10 @@ export default function Layout(props) {
                                 <i className="fs-4 bi-speedometer2"></i> <span className="ms-2 d-sm-inline">Dashboard</span> </a>
                             <ul className="collapse show nav flex-column ms-1" id="submenu1" data-bs-parent="#menu">
                                 <li className="w-100">
-                                    <a href="#" className="nav-link px-0"> <span className="d-none d-sm-inline">Item</span> 1 </a>
+                                    <a href="#" className="nav-link px-0"> <span className="d-sm-inline">Item</span> 1 </a>
                                 </li>
                                 <li>
-                                    <a href="#" className="nav-link px-0"> <span className="d-none d-sm-inline">Item</span> 2 </a>
+                                    <a href="#" className="nav-link px-0"> <span className="d-sm-inline">Item</span> 2 </a>
                                 </li>
                             </ul>
                         </li>
@@ -181,10 +181,10 @@ export default function Layout(props) {
                                 <i className="fs-4 bi-bootstrap"></i> <span className="ms-2 d-sm-inline">Bootstrap</span></a>
                             <ul className="collapse nav flex-column ms-1" id="submenu2" data-bs-parent="#menu">
                                 <li className="w-100">
-                                    <a href="#" className="nav-link px-0"> <span className="d-none d-sm-inline">Item</span> 1</a>
+                                    <a href="#" className="nav-link px-0"> <span className="d-sm-inline">Item</span> 1</a>
                                 </li>
                                 <li>
-                                    <a href="#" className="nav-link px-0"> <span className="d-none d-sm-inline">Item</span> 2</a>
+                                    <a href="#" className="nav-link px-0"> <span className="d-sm-inline">Item</span> 2</a>
                                 </li>
                             </ul>
                         </li>
@@ -193,17 +193,11 @@ export default function Layout(props) {
                                 <i className="fs-4 bi-grid"></i> <span className="ms-2 d-sm-inline">Products</span> </a>
                             <ul className="collapse nav flex-column ms-1" id="submenu3" data-bs-parent="#menu">
                                 <li className="w-100">
-                                    <a href="#" className="nav-link px-0"> <span className="d-none d-sm-inline">Product</span> 1</a>
+                                    <a href="#" className="nav-link px-0"> <span className="d-sm-inline">Product</span> 1</a>
                                 </li>
                                 <li>
-                                    <a href="#" className="nav-link px-0"> <span className="d-none d-sm-inline">Product</span> 2</a>
-                                </li>
-                                <li>
-                                    <a href="#" className="nav-link px-0"> <span className="d-none d-sm-inline">Product</span> 3</a>
-                                </li>
-                                <li>
-                                    <a href="#" className="nav-link px-0"> <span className="d-none d-sm-inline">Product</span> 4</a>
-                                </li>
+                                    <a href="#" className="nav-link px-0"> <span className="d-sm-inline">Product</span> 2</a>
+                                </li>                                
                             </ul>
                         </li>
                         <li>
